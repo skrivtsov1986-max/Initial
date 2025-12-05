@@ -1,0 +1,25 @@
+# Build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.vspscc
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio cache/options directory
+.vs/
+
+# ASP.NET temp files
+*.dbmdl
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Others
+wwwroot/lib/

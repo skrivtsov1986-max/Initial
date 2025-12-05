@@ -1,0 +1,50 @@
+@model IEnumerable<PlanPkTreeItem>
+@{
+    ViewData["Title"] = "План-график";
+}
+
+<div class="d-flex align-items-center mb-3">
+    <h2 class="me-3">План-график (PlanPK)</h2>
+    <span class="badge bg-secondary">@Model.Count() записей</span>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-sm table-striped tree-table">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Номер</th>
+                <th scope="col">Наименование</th>
+                <th scope="col" class="text-end">План, ч.</th>
+                <th scope="col" class="text-end">Факт, ч.</th>
+                <th scope="col">Срок</th>
+            </tr>
+        </thead>
+        <tbody>
+            @RenderRows(Model, 0)
+        </tbody>
+    </table>
+</div>
+
+@functions {
+    private void RenderRows(IEnumerable<PlanPkTreeItem> nodes, int depth)
+    {
+        foreach (var node in nodes)
+        {
+            var depthStyle = $"--depth: {depth};";
+            <tr data-depth="@depth" style="@depthStyle">
+                <td>
+                    <span class="@("node-" + (node.Children.Any() ? "label" : "leaf"))">@node.Item.Number</span>
+                </td>
+                <td>@node.Item.Name</td>
+                <td class="text-end">@node.Item.PlanHour.ToString("0.##")</td>
+                <td class="text-end">@node.Item.FactHour.ToString("0.##")</td>
+                <td>@node.Item.TermDate.ToString("dd.MM.yyyy")</td>
+            </tr>;
+
+            if (node.Children.Any())
+            {
+                RenderRows(node.Children, depth + 1);
+            }
+        }
+    }
+}
