@@ -1,0 +1,11 @@
+.tree-table tbody tr[data-depth] td:first-child {
+    padding-left: calc(1rem + (var(--depth) * 1.25rem));
+}
+
+.tree-table tbody tr .node-label {
+    font-weight: 600;
+}
+
+.tree-table tbody tr .node-leaf {
+    font-weight: 400;
+}
